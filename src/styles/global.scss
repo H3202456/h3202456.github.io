@@ -793,3 +793,207 @@ p {
         padding: 16px 0;
     }
 }
+
+/* ==============================
+   Apple-like Typography System
+   苹果风系统字体优化
+================================= */
+
+:root {
+    --font-sans:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "SF Pro Text",
+        "PingFang SC",
+        "Hiragino Sans GB",
+        "Microsoft YaHei UI",
+        "Microsoft YaHei",
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
+
+    --font-mono:
+        "SF Mono",
+        "SFMono-Regular",
+        ui-monospace,
+        Menlo,
+        Monaco,
+        Consolas,
+        "Liberation Mono",
+        monospace;
+}
+
+/* 全站统一系统字体 */
+html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* 正文基础排版 */
+body {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: -0.01em;
+}
+
+/* 标题统一走苹果式大字重，不混宋体/楷体 */
+h1,
+h2,
+h3,
+.hero-title {
+    font-family: var(--font-sans);
+    color: var(--color-text, #171717);
+    letter-spacing: -0.055em;
+    font-feature-settings: "kern";
+}
+
+/* Hero 大标题 */
+h1,
+.hero-title {
+    font-weight: 700;
+    line-height: 0.95;
+}
+
+/* 二级标题 */
+h2 {
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.045em;
+}
+
+/* 三级标题 */
+h3 {
+    font-weight: 650;
+    line-height: 1.3;
+    letter-spacing: -0.025em;
+}
+
+/* 正文：更接近 Apple 官网那种清楚、轻盈的文字 */
+p,
+li {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    line-height: 1.8;
+    letter-spacing: -0.005em;
+    color: rgba(23, 23, 23, 0.72);
+}
+
+/* 重点说明文字 */
+.hero-desc,
+.hero-description,
+.section-side-note {
+    font-weight: 400;
+    line-height: 1.85;
+    color: rgba(23, 23, 23, 0.68);
+}
+
+/* 小标签：保持克制，不要太跳 */
+.section-label,
+.project-tags span,
+.tags span,
+.award-topline span,
+.contact-card span,
+.nav a,
+.site-nav a {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    color: rgba(23, 23, 23, 0.58);
+}
+
+/* 导航文字 */
+.nav a,
+.site-nav a {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+}
+
+/* 项目、能力、联系卡片标题 */
+.project-card h3,
+.project-item h3,
+.skill-card h3,
+.belief-card h3,
+.contact-card h3 {
+    font-family: var(--font-sans);
+    font-weight: 650;
+    letter-spacing: -0.025em;
+}
+
+/* 奖项区：正式但不死板 */
+.award-content h3 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    line-height: 1.45;
+    letter-spacing: -0.015em;
+}
+
+/* 联系方式 */
+.contact-card a,
+.contact-card p {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+}
+
+/* 英文、代码、年份数字可以用系统等宽字体 */
+.award-year,
+.project-meta,
+code,
+pre {
+    font-family: var(--font-mono);
+}
+
+/* 手机端字体优化 */
+@media (max-width: 768px) {
+    body {
+        font-size: 15px;
+        line-height: 1.75;
+    }
+
+    h1,
+    .hero-title {
+        letter-spacing: -0.06em;
+        line-height: 0.98;
+    }
+
+    h2 {
+        letter-spacing: -0.045em;
+        line-height: 1.08;
+    }
+
+    h3 {
+        letter-spacing: -0.02em;
+    }
+
+    p,
+    li {
+        line-height: 1.75;
+        color: rgba(23, 23, 23, 0.74);
+    }
+
+    .hero-desc,
+    .hero-description,
+    .section-side-note {
+        line-height: 1.8;
+    }
+
+    .section-label,
+    .project-tags span,
+    .tags span,
+    .award-topline span {
+        font-size: 11px;
+        letter-spacing: 0.02em;
+    }
+
+    .nav a,
+    .site-nav a {
+        font-size: 13px;
+    }
+}
