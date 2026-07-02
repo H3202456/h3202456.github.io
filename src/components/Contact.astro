@@ -1,44 +1,79 @@
+---
+const contacts = [
+  {
+    label: "Email",
+    value: "huahang3202456@gmail.com",
+    href: "mailto:huahang3202456@gmail.com",
+    note: "主要联系邮箱",
+    active: true,
+  },
+  {
+    label: "Phone",
+    value: "135****8649",
+    href: "tel:13528938649",
+    note: "公开页面做了隐藏处理",
+    active: true,
+  },
+  {
+    label: "GitHub",
+    value: "H3202456",
+    href: "https://github.com/H3202456",
+    note: "代码仓库与作品集托管",
+    active: true,
+  },
+  {
+    label: "小红书",
+    value: "HH3202456",
+    href: "",
+    note: "AI Demo 复盘与项目记录",
+    active: false,
+  },
+  {
+    label: "抖音",
+    value: "HH3202456",
+    href: "",
+    note: "AI Demo 图文与短内容记录",
+    active: false,
+  },
+];
+---
+
 <section id="contact" class="section contact" data-animate>
   <div class="section-label">06 / Contact</div>
 
   <div class="section-grid">
-    <h2>联系方式</h2>
+    <div>
+      <h2>联系我</h2>
+      <p class="section-side-note">
+        如果你想了解我的项目、AI Demo、作品集，或者有真实需求想一起验证，可以通过下面这些方式找到我。
+      </p>
+    </div>
 
-    <div class="contact-box">
+    <div class="contact-box" data-animate>
       <p>
-        如果你想了解我的 AI Demo 项目、作品集、内容复盘，或者交流产品想法，可以通过下面方式联系我。
+        我目前正在持续做 AI Demo、个人作品集和内容记录。比起空谈方向，我更关注能不能把一个想法做出来、讲清楚、验证掉。
       </p>
 
       <div class="contact-card-list">
-        <a class="contact-card" href="mailto:huahang3202456@gmail.com">
-          <span class="contact-label">Email</span>
-          <strong>huahang3202456@gmail.com</strong>
-        </a>
-
-        <a class="contact-card" href="tel:13528938649">
-          <span class="contact-label">Phone</span>
-          <strong>135****8649</strong>
-          <small>公开网页建议隐藏部分号码</small>
-        </a>
-
-        <a class="contact-card" href="https://github.com/arifmolla13446" target="_blank" rel="noreferrer">
-          <span class="contact-label">GitHub</span>
-          <strong>@arifmolla13446</strong>
-        </a>
-
-        <a class="contact-card contact-card--disabled" href="#" aria-label="小红书主页链接待补充">
-          <span class="contact-label">小红书</span>
-          <strong>待补充</strong>
-        </a>
-
-        <a class="contact-card contact-card--disabled" href="#" aria-label="抖音主页链接待补充">
-          <span class="contact-label">抖音</span>
-          <strong>待补充</strong>
-        </a>
+        {contacts.map((item) =>
+          item.active ? (
+            <a class="contact-card" href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noreferrer" : undefined}>
+              <span class="contact-label">{item.label}</span>
+              <strong>{item.value}</strong>
+              <small>{item.note}</small>
+            </a>
+          ) : (
+            <div class="contact-card contact-card--disabled">
+              <span class="contact-label">{item.label}</span>
+              <strong>{item.value}</strong>
+              <small>{item.note}</small>
+            </div>
+          )
+        )}
       </div>
 
       <p class="small-note">
-        后续可以把这里改成 GitHub、项目演示地址、小红书主页、抖音主页和邮箱入口，形成真正的个人主页入口。
+        小红书和抖音目前先展示账号 ID。等拿到准确主页链接后，再改成可点击入口。
       </p>
     </div>
   </div>

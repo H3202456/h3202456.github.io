@@ -844,3 +844,320 @@ h3 {
         padding: 16px 0;
     }
 }
+
+/* ==============================
+   Creative Motion Layer
+   参考创意作品集的轻量动效层
+================================= */
+
+.motion-ready [data-animate] {
+    will-change: transform, opacity, filter;
+}
+
+.site-shell {
+    position: relative;
+    z-index: 2;
+}
+
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 80;
+    width: 100%;
+    height: 2px;
+    transform: scaleX(0);
+    transform-origin: left center;
+    background: rgba(23, 23, 23, 0.7);
+    pointer-events: none;
+}
+
+.cursor-glow {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    width: 220px;
+    height: 220px;
+    border-radius: 999px;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle,
+            rgba(23, 23, 23, 0.055) 0%,
+            rgba(23, 23, 23, 0.025) 34%,
+            transparent 70%);
+    mix-blend-mode: multiply;
+}
+
+.ambient-code {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0.18;
+    mask-image: linear-gradient(to bottom,
+            transparent 0%,
+            black 12%,
+            black 82%,
+            transparent 100%);
+}
+
+.ambient-code__line {
+    position: absolute;
+    white-space: nowrap;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1;
+    letter-spacing: 0.18em;
+    color: rgba(23, 23, 23, 0.18);
+    user-select: none;
+}
+
+.hero__title {
+    overflow: hidden;
+}
+
+.hero__title span {
+    transform-origin: left bottom;
+    will-change: transform, opacity;
+}
+
+.project-card,
+.skill-card,
+.belief-card,
+.contact-card,
+.button {
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+.project-card,
+.skill-card,
+.belief-card,
+.contact-card {
+    position: relative;
+}
+
+.project-card::after,
+.skill-card::after,
+.belief-card::after,
+.contact-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at 50% 0%,
+            rgba(255, 255, 255, 0.62),
+            transparent 58%);
+    transition: opacity 0.35s ease;
+}
+
+.project-card:hover::after,
+.skill-card:hover::after,
+.belief-card:hover::after,
+.contact-card:hover::after {
+    opacity: 1;
+}
+
+.brand,
+.section-label {
+    cursor: default;
+}
+
+.more-project-list {
+    transform-origin: top center;
+}
+
+@media (max-width: 860px) {
+
+    .ambient-code,
+    .cursor-glow {
+        display: none;
+    }
+
+    .scroll-progress {
+        height: 2px;
+    }
+
+    .project-card,
+    .skill-card,
+    .belief-card,
+    .contact-card,
+    .button {
+        transform: none !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .ambient-code,
+    .cursor-glow {
+        display: none;
+    }
+}
+
+/* ==============================
+   Mobile Spacing Override
+   手机端留白优化覆盖版
+   直接放在 global.scss 最底部
+================================= */
+
+@media (max-width: 860px) {
+    .site-shell {
+        width: min(100% - 44px, var(--container)) !important;
+        margin-inline: auto;
+    }
+
+    .site-header {
+        margin-top: 14px;
+        margin-bottom: 32px;
+        padding: 14px 16px;
+    }
+
+    .section {
+        padding-block: 72px;
+    }
+
+    .section-grid,
+    .section-heading {
+        gap: 32px;
+    }
+
+    .hero {
+        padding-top: 84px;
+        padding-bottom: 72px;
+    }
+
+    .hero__desc {
+        max-width: 100%;
+    }
+
+    .project-card,
+    .skill-card,
+    .belief-card,
+    .contact-card,
+    .contact-box {
+        padding: 24px;
+    }
+
+    .project-card {
+        border-radius: 24px;
+    }
+
+    .award-row {
+        padding-block: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .site-shell {
+        width: min(100% - 40px, var(--container)) !important;
+        margin-inline: auto;
+    }
+
+    .site-header {
+        margin-top: 12px;
+        margin-bottom: 28px;
+        padding: 13px 15px;
+    }
+
+    .section {
+        padding-block: 64px;
+    }
+
+    .section-label {
+        margin-bottom: 16px;
+    }
+
+    .hero {
+        padding-top: 72px;
+        padding-bottom: 64px;
+    }
+
+    .hero__title {
+        font-size: clamp(38px, 13vw, 54px);
+        line-height: 1;
+    }
+
+    .hero__desc {
+        font-size: 15px;
+        line-height: 1.8;
+    }
+
+    .project-card,
+    .skill-card,
+    .belief-card,
+    .contact-card,
+    .contact-box {
+        padding: 22px;
+    }
+
+    .project-card {
+        border-radius: 22px;
+    }
+
+    .project-card-head h3 {
+        font-size: 20px;
+    }
+
+    .project-card p,
+    .section-side-note,
+    .contact-box>p {
+        font-size: 14px;
+        line-height: 1.8;
+    }
+
+    .project-tags {
+        gap: 7px;
+    }
+
+    .project-tags span {
+        font-size: 11px;
+        padding: 5px 8px;
+    }
+
+    .award-topline h3 {
+        font-size: 16px;
+    }
+
+    .award-content p {
+        font-size: 13px;
+    }
+
+    .contact-card strong {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 390px) {
+    .site-shell {
+        width: min(100% - 34px, var(--container)) !important;
+    }
+
+    .project-card,
+    .skill-card,
+    .belief-card,
+    .contact-card,
+    .contact-box {
+        padding: 20px;
+    }
+
+    .hero__title {
+        font-size: clamp(36px, 13vw, 50px);
+    }
+}
