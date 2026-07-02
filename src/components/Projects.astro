@@ -1,28 +1,78 @@
 ---
-const projects = [
+const featuredProjects = [
   {
     title: "《别想了》AI 决策工具",
-    desc: "一个帮助用户减少纠结的小工具。用户输入“要不要做某件事”，系统会给出直接建议、理由和下一步行动。这个项目经历了从想法、后端接口、AI 调用、微信小程序连接，到真实设备测试和体验版发布。",
+    status: "已完成体验版",
+    desc: "一个帮助用户减少纠结的小工具。用户输入“要不要做某件事”，系统会给出直接建议、理由和下一步行动。这个项目从后端接口、AI 调用、微信小程序连接，到真实设备测试和体验版发布，已经完整跑过一遍。",
     tags: ["微信小程序", "Flask", "Gemini API", "产品验证"],
   },
   {
+    title: "AI 需求雷达",
+    status: "开发 / 复盘中",
+    desc: "用于从内容平台、评论区和真实表达里提取用户痛点，判断一个问题是否值得做成 AI Demo。这个项目更偏向我的长期训练方向：找真实需求，而不是只做看起来好看的功能。",
+    tags: ["需求发现", "痛点分析", "AI Demo", "产品判断"],
+  },
+  {
     title: "AI 日报 / 周报分析助手",
-    desc: "用户上传 Excel 后，系统自动生成日报、周报、风险提示和优先级建议。我对这个项目的理解是：老板真正想知道的不是“今天做了什么”，而是“哪里可能快出问题了”。",
+    status: "已完成 Demo",
+    desc: "用户上传 Excel 后，系统自动生成日报、周报、风险提示和优先级建议。我对这个项目的理解是：老板真正想知道的不是今天做了什么，而是哪里可能快出问题了。",
     tags: ["Streamlit", "Excel 分析", "AI 总结", "风险识别"],
   },
   {
-    title: "AI 小红书笔记体检器",
-    desc: "输入标题、封面、正文和数据，分析一篇笔记可能存在的问题。这个项目让我意识到：AI 输出看起来专业，不代表它一定判断正确。",
-    tags: ["内容分析", "AI 诊断", "小红书", "复盘工具"],
-  },
-  {
     title: "AI 生活管理助手",
-    desc: "记录一天的学习、运动、拖延、睡眠和情绪状态，再由 AI 生成当天复盘。重点不是“记录生活”，而是帮助自己从日常数据里看见风险和趋势。",
+    status: "已完成 Demo",
+    desc: "记录一天的学习、运动、拖延、睡眠和情绪状态，再由 AI 生成当天复盘。重点不是记录生活，而是帮助自己从日常数据里看见风险和趋势。",
     tags: ["个人管理", "日复盘", "AI 总结", "Streamlit"],
   },
   {
+    title: "AI 小红书笔记体检器",
+    status: "已完成 Demo",
+    desc: "输入标题、封面、正文和数据，分析一篇笔记可能存在的问题。这个项目让我意识到：AI 输出看起来专业，不代表它一定判断正确。",
+    tags: ["内容分析", "AI 诊断", "小红书", "复盘工具"],
+  },
+];
+
+const moreProjects = [
+  {
+    title: "AI 知识库问答助手",
+    status: "已完成 Demo",
+    desc: "把项目资料、说明文档或业务资料放进系统后，用户可以基于这些内容进行提问。这个项目让我理解了 AI 工具不只是聊天，而是可以围绕具体资料提供答案。",
+    tags: ["知识库", "问答系统", "Gemini API", "Streamlit"],
+  },
+  {
+    title: "AI 产品评论分析器",
+    status: "暂停复盘",
+    desc: "用于分析商品评论，输出购买建议、优缺点和风险。但在测试中发现评论样本偏差、恶意差评和 AI 误判会影响结果，所以目前作为一次产品判断复盘保留。",
+    tags: ["评论分析", "消费决策", "AI 判断", "项目复盘"],
+  },
+  {
+    title: "AI 睡前防刷手机助手",
+    status: "内容型 Demo",
+    desc: "围绕睡前无聊、刷短视频停不下来等场景，尝试做一个低刺激、轻干预的生活习惯辅助工具。这个方向更关注真实生活里的小问题。",
+    tags: ["生活习惯", "睡眠场景", "AI 陪伴", "内容实验"],
+  },
+  {
+    title: "AI 总结工具",
+    status: "基础工具 Demo",
+    desc: "一个偏基础能力训练的总结类工具，用于练习输入处理、提示词组织和结构化输出。它不是最复杂的项目，但对理解 AI 应用流程有帮助。",
+    tags: ["文本总结", "结构化输出", "AI 工具", "基础 Demo"],
+  },
+  {
+    title: "Demo Validator",
+    status: "实验项目",
+    desc: "用于辅助判断一个 Demo 是否值得继续做，关注项目目标、使用场景、验证方式和下一步优化方向。它更像是我做 AI Demo 过程中的自我检查工具。",
+    tags: ["项目验证", "产品判断", "复盘工具", "AI Demo"],
+  },
+  {
+    title: "Resume AI",
+    status: "早期 Demo",
+    desc: "一个围绕简历表达和求职材料优化的小工具，用于探索 AI 在求职场景里的辅助价值。",
+    tags: ["简历优化", "求职辅助", "AI 文案", "早期项目"],
+  },
+  {
     title: "养老机构管理系统",
-    desc: "Java 课程项目，面向养老机构信息管理，包含老人信息、健康记录、护理记录和风险判断模块。使用面向对象思想，通过实体类、服务层和菜单视图进行分层。",
+    status: "Java 课程项目",
+    desc: "面向养老机构信息管理，包含老人信息、健康记录、护理记录和风险判断模块。项目使用面向对象思想，通过实体类、服务层和菜单视图进行分层。",
     tags: ["Java", "面向对象", "文件存储", "管理系统"],
   },
 ];
@@ -31,29 +81,56 @@ const projects = [
 <section id="projects" class="section projects" data-animate>
   <div class="section-label">02 / Projects</div>
 
-  <div class="section-heading">
-    <h2>做过的项目</h2>
-    <p>
-      项目不是摆设，也不是“作品集坟场”。每个 Demo 都对应一次需求理解、一次实现训练、一次复盘。
-    </p>
-  </div>
+  <div class="section-grid">
+    <div>
+      <h2>做过的项目</h2>
+      <p class="section-side-note">
+        我不会把所有文件夹都塞到首页。默认只展示最能代表当前方向的项目，其他项目先收起来。
+        毕竟作品集不是硬盘目录，虽然人类经常分不清这两件事。
+      </p>
+    </div>
 
-  <div class="project-list">
-    {projects.map((project, index) => (
-      <article class="project-item" data-animate>
-        <div class="project-index">{String(index + 1).padStart(2, "0")}</div>
+    <div class="projects-stack">
+      <div class="project-list">
+        {featuredProjects.map((project) => (
+          <article class="project-card" data-animate>
+            <div class="project-card-head">
+              <h3>{project.title}</h3>
+              <span>{project.status}</span>
+            </div>
 
-        <div class="project-main">
-          <h3>{project.title}</h3>
-          <p>{project.desc}</p>
+            <p>{project.desc}</p>
 
-          <div class="tag-list">
-            {project.tags.map((tag) => (
-              <span>{tag}</span>
-            ))}
-          </div>
+            <div class="project-tags">
+              {project.tags.map((tag) => <span>{tag}</span>)}
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <details class="more-projects">
+        <summary>
+          <span>查看更多项目</span>
+          <small>{moreProjects.length} 个已隐藏</small>
+        </summary>
+
+        <div class="project-list more-project-list">
+          {moreProjects.map((project) => (
+            <article class="project-card project-card-secondary" data-animate>
+              <div class="project-card-head">
+                <h3>{project.title}</h3>
+                <span>{project.status}</span>
+              </div>
+
+              <p>{project.desc}</p>
+
+              <div class="project-tags">
+                {project.tags.map((tag) => <span>{tag}</span>)}
+              </div>
+            </article>
+          ))}
         </div>
-      </article>
-    ))}
+      </details>
+    </div>
   </div>
 </section>

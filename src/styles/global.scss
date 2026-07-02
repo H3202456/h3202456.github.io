@@ -1,19 +1,56 @@
 @use "./variables";
 @use "./animations";
 
+/* ==============================
+   Base
+================================= */
+
+:root {
+    --font-sans:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "SF Pro Text",
+        "PingFang SC",
+        "Hiragino Sans GB",
+        "Microsoft YaHei UI",
+        "Microsoft YaHei",
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
+
+    --font-mono:
+        "SF Mono",
+        "SFMono-Regular",
+        ui-monospace,
+        Menlo,
+        Monaco,
+        Consolas,
+        "Liberation Mono",
+        monospace;
+}
+
 * {
     box-sizing: border-box;
 }
 
 html {
     scroll-behavior: smooth;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
 body {
     margin: 0;
     min-height: 100vh;
+    overflow-x: hidden;
     color: var(--ink);
-    font-family: var(--font-cn);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: -0.01em;
     background:
         radial-gradient(circle at 20% 10%, rgba(255, 255, 255, 0.7), transparent 26%),
         radial-gradient(circle at 80% 0%, rgba(255, 255, 255, 0.45), transparent 22%),
@@ -35,8 +72,13 @@ a {
     text-decoration: none;
 }
 
-p {
-    line-height: 1.9;
+p,
+li {
+    margin-top: 0;
+    line-height: 1.8;
+    font-weight: 400;
+    letter-spacing: -0.005em;
+    color: rgba(23, 23, 23, 0.72);
 }
 
 ::selection {
@@ -48,6 +90,53 @@ p {
     width: min(100% - 32px, var(--container));
     margin: 0 auto;
 }
+
+/* ==============================
+   Typography
+================================= */
+
+h1,
+h2,
+h3 {
+    margin-top: 0;
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "kern";
+}
+
+h1 {
+    font-size: clamp(54px, 9vw, 126px);
+    font-weight: 700;
+    line-height: 0.96;
+    letter-spacing: -0.075em;
+}
+
+h2 {
+    font-size: clamp(36px, 5vw, 72px);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.045em;
+}
+
+h3 {
+    font-size: 24px;
+    font-weight: 650;
+    line-height: 1.3;
+    letter-spacing: -0.025em;
+}
+
+.section-label,
+.hero__eyebrow,
+.contact-label,
+.award-year,
+.project-card-head span,
+.project-tags span {
+    font-family: var(--font-sans);
+}
+
+/* ==============================
+   Header
+================================= */
 
 .site-header {
     position: sticky;
@@ -66,7 +155,6 @@ p {
 }
 
 .brand {
-    font-family: var(--font-sans);
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 0.04em;
@@ -75,7 +163,9 @@ p {
 .nav {
     display: flex;
     gap: 16px;
-    font-size: 14px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
     color: var(--muted);
 
     a {
@@ -87,6 +177,10 @@ p {
     }
 }
 
+/* ==============================
+   Section Layout
+================================= */
+
 .section {
     padding: 96px 0;
     border-bottom: 1px solid var(--line);
@@ -94,12 +188,10 @@ p {
 
 .section-label {
     margin-bottom: 28px;
-    font-family: var(--font-sans);
     font-size: 12px;
     font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted);
+    letter-spacing: 0.08em;
+    color: rgba(23, 23, 23, 0.58);
 }
 
 .section-grid {
@@ -110,9 +202,6 @@ p {
 
     h2 {
         margin: 0;
-        font-size: clamp(36px, 5vw, 72px);
-        line-height: 1.08;
-        letter-spacing: -0.04em;
     }
 }
 
@@ -123,15 +212,12 @@ p {
     align-items: end;
     margin-bottom: 48px;
 
-    h2 {
+    h2,
+    p {
         margin: 0;
-        font-size: clamp(38px, 6vw, 82px);
-        line-height: 1;
-        letter-spacing: -0.05em;
     }
 
     p {
-        margin: 0;
         color: var(--muted);
     }
 }
@@ -139,9 +225,9 @@ p {
 .section-side-note {
     max-width: 360px;
     margin: 24px 0 0;
-    color: var(--muted);
     font-size: 16px;
-    line-height: 1.8;
+    line-height: 1.85;
+    color: rgba(23, 23, 23, 0.68);
 }
 
 .content-stack {
@@ -159,7 +245,9 @@ p {
     }
 }
 
-/* Hero */
+/* ==============================
+   Hero
+================================= */
 
 .hero {
     min-height: calc(100vh - 120px);
@@ -171,18 +259,17 @@ p {
 
 .hero__eyebrow {
     margin-bottom: 28px;
-    font-family: var(--font-sans);
     font-size: 13px;
     font-weight: 700;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.12em;
     color: var(--muted);
-    text-transform: uppercase;
 }
 
 .hero__title {
     max-width: 980px;
     margin: 0;
     font-size: clamp(54px, 9vw, 126px);
+    font-weight: 700;
     line-height: 0.96;
     letter-spacing: -0.075em;
 
@@ -195,7 +282,8 @@ p {
     max-width: 760px;
     margin: 36px 0 0;
     font-size: clamp(19px, 2vw, 25px);
-    color: var(--muted);
+    line-height: 1.75;
+    color: rgba(23, 23, 23, 0.68);
 }
 
 .hero__actions {
@@ -212,7 +300,6 @@ p {
     min-height: 48px;
     padding: 0 20px;
     border-radius: 999px;
-    font-family: var(--font-sans);
     font-size: 14px;
     font-weight: 700;
     transition:
@@ -235,70 +322,147 @@ p {
     background: rgba(255, 252, 246, 0.4);
 }
 
-/* Projects */
+/* ==============================
+   Projects
+================================= */
+
+.projects-stack {
+    display: grid;
+    gap: 24px;
+}
 
 .project-list {
     display: grid;
-    border-top: 1px solid var(--line);
+    gap: 18px;
 }
 
-.project-item {
-    display: grid;
-    grid-template-columns: 120px 1fr;
-    gap: 32px;
-    padding: 38px 0;
-    border-bottom: 1px solid var(--line);
+.project-card {
+    padding: 28px;
+    overflow: hidden;
+    border: 1px solid rgba(23, 23, 23, 0.1);
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.52);
+    box-shadow: 0 18px 60px rgba(23, 23, 23, 0.055);
     transition:
-        padding-left 0.24s ease,
-        background 0.24s ease;
+        transform 0.35s ease,
+        border-color 0.35s ease,
+        background 0.35s ease,
+        box-shadow 0.35s ease;
 }
 
-.project-item:hover {
-    padding-left: 18px;
-    background: rgba(255, 252, 246, 0.28);
+.project-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(23, 23, 23, 0.18);
+    background: rgba(255, 255, 255, 0.68);
+    box-shadow: 0 24px 70px rgba(23, 23, 23, 0.08);
 }
 
-.project-index {
-    font-family: var(--font-sans);
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--muted);
-}
+.project-card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 14px;
 
-.project-main {
     h3 {
         margin: 0;
-        font-size: clamp(28px, 4vw, 52px);
-        line-height: 1.05;
-        letter-spacing: -0.04em;
+        font-size: clamp(22px, 3vw, 30px);
+        line-height: 1.18;
     }
 
-    p {
-        max-width: 840px;
-        margin: 18px 0 0;
-        color: var(--muted);
-        font-size: 18px;
+    span {
+        flex: 0 0 auto;
+        padding: 6px 10px;
+        border: 1px solid rgba(23, 23, 23, 0.1);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.45);
+        font-size: 12px;
+        font-weight: 600;
+        color: rgba(23, 23, 23, 0.56);
     }
 }
 
-.tag-list {
+.project-card p {
+    max-width: 760px;
+    margin: 0;
+    color: rgba(23, 23, 23, 0.68);
+}
+
+.project-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
     margin-top: 22px;
 
     span {
-        padding: 7px 11px;
-        border: 1px solid var(--line);
+        padding: 6px 10px;
         border-radius: 999px;
-        font-family: var(--font-sans);
+        background: rgba(23, 23, 23, 0.06);
         font-size: 12px;
-        color: var(--muted);
-        background: rgba(255, 252, 246, 0.5);
+        font-weight: 600;
+        color: rgba(23, 23, 23, 0.58);
     }
 }
 
-/* Awards */
+.more-projects {
+    margin-top: 4px;
+
+    summary {
+        list-style: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 18px 22px;
+        border: 1px dashed rgba(23, 23, 23, 0.18);
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.32);
+        color: rgba(23, 23, 23, 0.72);
+        transition:
+            background 0.3s ease,
+            border-color 0.3s ease;
+    }
+
+    summary::-webkit-details-marker {
+        display: none;
+    }
+
+    summary:hover {
+        background: rgba(255, 255, 255, 0.58);
+        border-color: rgba(23, 23, 23, 0.28);
+    }
+
+    summary span {
+        font-size: 15px;
+        font-weight: 650;
+    }
+
+    summary small {
+        font-size: 13px;
+        color: rgba(23, 23, 23, 0.48);
+    }
+
+    &[open] summary {
+        margin-bottom: 18px;
+    }
+}
+
+.more-project-list {
+    animation: fadeUp 0.35s ease both;
+}
+
+.project-card-secondary {
+    opacity: 0.88;
+}
+
+.project-card-secondary:hover {
+    opacity: 1;
+}
+
+/* ==============================
+   Awards
+================================= */
 
 .award-list {
     display: grid;
@@ -315,15 +479,22 @@ p {
 
 .award-year {
     padding-top: 5px;
-    font-family: var(--font-sans);
+    font-family: var(--font-mono);
     font-size: 13px;
-    font-weight: 800;
+    font-weight: 700;
     color: var(--muted);
 }
 
 .award-content {
     display: grid;
     gap: 8px;
+
+    p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.75;
+    }
 }
 
 .award-topline {
@@ -335,8 +506,9 @@ p {
     h3 {
         margin: 0;
         font-size: 21px;
+        font-weight: 600;
         line-height: 1.45;
-        letter-spacing: -0.02em;
+        letter-spacing: -0.015em;
     }
 
     span {
@@ -344,22 +516,16 @@ p {
         padding: 5px 9px;
         border: 1px solid var(--line);
         border-radius: 999px;
-        font-family: var(--font-sans);
+        background: rgba(255, 252, 246, 0.5);
         font-size: 11px;
         font-weight: 700;
         color: var(--muted);
-        background: rgba(255, 252, 246, 0.5);
     }
 }
 
-.award-content p {
-    margin: 0;
-    color: var(--muted);
-    font-size: 15px;
-    line-height: 1.75;
-}
-
-/* Skills */
+/* ==============================
+   Skills
+================================= */
 
 .skill-grid {
     display: grid;
@@ -378,7 +544,6 @@ p {
     h3 {
         margin: 0;
         font-size: 28px;
-        letter-spacing: -0.03em;
     }
 
     p {
@@ -387,7 +552,9 @@ p {
     }
 }
 
-/* Beliefs */
+/* ==============================
+   Beliefs
+================================= */
 
 .belief-card {
     padding: clamp(32px, 6vw, 72px);
@@ -398,11 +565,9 @@ p {
 
     .belief-kicker {
         margin: 0 0 22px;
-        font-family: var(--font-sans);
         font-size: 13px;
         font-weight: 700;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
+        letter-spacing: 0.1em;
         color: var(--muted);
     }
 
@@ -422,7 +587,9 @@ p {
     }
 }
 
-/* Contact */
+/* ==============================
+   Contact
+================================= */
 
 .contact-box {
     padding: 32px;
@@ -462,7 +629,6 @@ p {
     }
 
     strong {
-        font-family: var(--font-sans);
         font-size: 16px;
         word-break: break-word;
     }
@@ -474,11 +640,9 @@ p {
 }
 
 .contact-label {
-    font-family: var(--font-sans);
     font-size: 11px;
     font-weight: 800;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
+    letter-spacing: 0.1em;
     color: var(--muted);
 }
 
@@ -491,11 +655,13 @@ p {
     font-size: 14px;
 }
 
-/* Responsive */
+/* ==============================
+   Responsive
+================================= */
 
 @media (max-width: 860px) {
     .site-shell {
-        width: min(100% - 22px, var(--container));
+        width: min(100% - 28px, var(--container));
     }
 
     .site-header {
@@ -511,6 +677,11 @@ p {
         padding: 72px 0;
     }
 
+    .section-label {
+        margin-bottom: 18px;
+        font-size: 12px;
+    }
+
     .section-grid,
     .section-heading {
         grid-template-columns: 1fr;
@@ -523,218 +694,97 @@ p {
 
     .hero {
         min-height: auto;
-        padding: 96px 0 80px;
+        padding: 88px 0 72px;
     }
 
     .hero__title {
-        font-size: clamp(46px, 16vw, 72px);
+        font-size: clamp(42px, 15vw, 72px);
+        line-height: 0.98;
+        letter-spacing: -0.065em;
     }
 
-    .project-item {
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
-
-    .award-row {
-        grid-template-columns: 1fr;
-        gap: 10px;
-    }
-
-    .award-topline {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
-
-    .skill-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .contact-box {
-        padding: 24px;
-    }
-}
-
-/* ==============================
-   Mobile responsive fixes
-   手机端适配兜底优化
-================================= */
-
-@media (max-width: 768px) {
-    html {
-        font-size: 15px;
-    }
-
-    body {
-        overflow-x: hidden;
-    }
-
-    .site-header,
-    .header,
-    nav {
-        width: 100%;
-    }
-
-    .site-header {
-        padding: 16px 18px;
-    }
-
-    .nav,
-    .site-nav {
-        gap: 12px;
-        overflow-x: auto;
-        white-space: nowrap;
-        padding-bottom: 4px;
-    }
-
-    .nav a,
-    .site-nav a {
-        font-size: 13px;
-    }
-
-    main {
-        width: 100%;
-        overflow-x: hidden;
-    }
-
-    .section {
-        padding: 72px 20px;
-    }
-
-    .section-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 28px;
-    }
-
-    .section-label {
-        font-size: 12px;
-        margin-bottom: 18px;
-    }
-
-    h1,
-    .hero-title {
-        font-size: clamp(42px, 13vw, 68px);
-        line-height: 0.95;
-        letter-spacing: -0.06em;
-    }
-
-    h2 {
-        font-size: clamp(30px, 9vw, 46px);
-        line-height: 1.05;
-        letter-spacing: -0.04em;
-    }
-
-    h3 {
-        font-size: 18px;
-        line-height: 1.35;
-    }
-
-    p {
-        font-size: 15px;
+    .hero__desc {
+        max-width: 100%;
+        font-size: 16px;
         line-height: 1.8;
     }
 
-    .hero {
-        min-height: auto;
-        padding: 96px 20px 72px;
-    }
-
-    .hero-inner {
-        width: 100%;
-    }
-
-    .hero-kicker,
-    .hero-desc,
-    .hero-description {
-        max-width: 100%;
-    }
-
-    .hero-desc,
-    .hero-description {
-        font-size: 16px;
-        line-height: 1.85;
-    }
-
-    .hero-actions {
-        display: flex;
+    .hero__actions {
         flex-direction: column;
         align-items: stretch;
-        gap: 12px;
+    }
+
+    .button {
         width: 100%;
     }
 
-    .hero-actions a,
-    .button,
-    .btn {
-        width: 100%;
-        text-align: center;
-    }
-
-    .project-list,
-    .projects-list {
-        gap: 18px;
-    }
-
-    .project-card,
-    .project-item {
+    .project-card {
         padding: 22px;
         border-radius: 22px;
     }
 
-    .project-card h3,
-    .project-item h3 {
-        font-size: 20px;
+    .project-card-head {
+        display: grid;
+        gap: 10px;
+
+        h3 {
+            font-size: 21px;
+            line-height: 1.25;
+        }
+
+        span {
+            width: fit-content;
+            font-size: 11px;
+        }
     }
 
-    .project-card p,
-    .project-item p {
+    .project-card p {
         font-size: 14px;
         line-height: 1.75;
     }
 
-    .project-tags,
-    .tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
+    .project-tags {
+        margin-top: 18px;
+        gap: 7px;
+
+        span {
+            padding: 5px 9px;
+            font-size: 11px;
+        }
     }
 
-    .project-tags span,
-    .tags span {
-        font-size: 12px;
-    }
-
-    .award-list {
-        gap: 10px;
+    .more-projects summary {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 16px 18px;
+        border-radius: 18px;
     }
 
     .award-row {
-        display: grid;
         grid-template-columns: 1fr;
         gap: 8px;
         padding: 18px 0;
     }
 
     .award-year {
+        padding-top: 0;
         font-size: 13px;
         opacity: 0.65;
     }
 
     .award-topline {
-        display: flex;
         flex-direction: column;
         align-items: flex-start;
         gap: 8px;
-    }
 
-    .award-topline h3 {
-        font-size: 16px;
-        line-height: 1.45;
-    }
+        h3 {
+            font-size: 16px;
+            line-height: 1.45;
+        }
 
-    .award-topline span {
-        font-size: 11px;
+        span {
+            font-size: 11px;
+        }
     }
 
     .award-content p {
@@ -742,12 +792,8 @@ p {
         line-height: 1.65;
     }
 
-    .skills-grid,
-    .contact-grid,
-    .beliefs-grid {
-        display: grid;
+    .skill-grid {
         grid-template-columns: 1fr;
-        gap: 16px;
     }
 
     .skill-card,
@@ -757,32 +803,37 @@ p {
         border-radius: 22px;
     }
 
-    .contact-card a,
-    .contact-card p {
-        word-break: break-word;
+    .contact-box {
+        padding: 24px;
     }
 }
 
 @media (max-width: 480px) {
+    .site-shell {
+        width: min(100% - 24px, var(--container));
+    }
+
+    body {
+        font-size: 15px;
+    }
+
     .section {
-        padding: 64px 16px;
-    }
-
-    .hero {
-        padding: 88px 16px 64px;
-    }
-
-    h1,
-    .hero-title {
-        font-size: clamp(38px, 14vw, 56px);
+        padding: 64px 0;
     }
 
     h2 {
-        font-size: clamp(28px, 10vw, 38px);
+        font-size: clamp(30px, 11vw, 42px);
+    }
+
+    .hero {
+        padding: 76px 0 64px;
+    }
+
+    .hero__title {
+        font-size: clamp(38px, 14vw, 56px);
     }
 
     .project-card,
-    .project-item,
     .skill-card,
     .belief-card,
     .contact-card {
@@ -791,209 +842,5 @@ p {
 
     .award-row {
         padding: 16px 0;
-    }
-}
-
-/* ==============================
-   Apple-like Typography System
-   苹果风系统字体优化
-================================= */
-
-:root {
-    --font-sans:
-        -apple-system,
-        BlinkMacSystemFont,
-        "SF Pro Display",
-        "SF Pro Text",
-        "PingFang SC",
-        "Hiragino Sans GB",
-        "Microsoft YaHei UI",
-        "Microsoft YaHei",
-        "Helvetica Neue",
-        Arial,
-        sans-serif;
-
-    --font-mono:
-        "SF Mono",
-        "SFMono-Regular",
-        ui-monospace,
-        Menlo,
-        Monaco,
-        Consolas,
-        "Liberation Mono",
-        monospace;
-}
-
-/* 全站统一系统字体 */
-html {
-    font-family: var(--font-sans);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-}
-
-/* 正文基础排版 */
-body {
-    font-family: var(--font-sans);
-    font-size: 16px;
-    line-height: 1.75;
-    letter-spacing: -0.01em;
-}
-
-/* 标题统一走苹果式大字重，不混宋体/楷体 */
-h1,
-h2,
-h3,
-.hero-title {
-    font-family: var(--font-sans);
-    color: var(--color-text, #171717);
-    letter-spacing: -0.055em;
-    font-feature-settings: "kern";
-}
-
-/* Hero 大标题 */
-h1,
-.hero-title {
-    font-weight: 700;
-    line-height: 0.95;
-}
-
-/* 二级标题 */
-h2 {
-    font-weight: 700;
-    line-height: 1.05;
-    letter-spacing: -0.045em;
-}
-
-/* 三级标题 */
-h3 {
-    font-weight: 650;
-    line-height: 1.3;
-    letter-spacing: -0.025em;
-}
-
-/* 正文：更接近 Apple 官网那种清楚、轻盈的文字 */
-p,
-li {
-    font-family: var(--font-sans);
-    font-weight: 400;
-    line-height: 1.8;
-    letter-spacing: -0.005em;
-    color: rgba(23, 23, 23, 0.72);
-}
-
-/* 重点说明文字 */
-.hero-desc,
-.hero-description,
-.section-side-note {
-    font-weight: 400;
-    line-height: 1.85;
-    color: rgba(23, 23, 23, 0.68);
-}
-
-/* 小标签：保持克制，不要太跳 */
-.section-label,
-.project-tags span,
-.tags span,
-.award-topline span,
-.contact-card span,
-.nav a,
-.site-nav a {
-    font-family: var(--font-sans);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: none;
-    color: rgba(23, 23, 23, 0.58);
-}
-
-/* 导航文字 */
-.nav a,
-.site-nav a {
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: -0.01em;
-}
-
-/* 项目、能力、联系卡片标题 */
-.project-card h3,
-.project-item h3,
-.skill-card h3,
-.belief-card h3,
-.contact-card h3 {
-    font-family: var(--font-sans);
-    font-weight: 650;
-    letter-spacing: -0.025em;
-}
-
-/* 奖项区：正式但不死板 */
-.award-content h3 {
-    font-family: var(--font-sans);
-    font-weight: 600;
-    line-height: 1.45;
-    letter-spacing: -0.015em;
-}
-
-/* 联系方式 */
-.contact-card a,
-.contact-card p {
-    font-family: var(--font-sans);
-    font-weight: 400;
-    letter-spacing: -0.01em;
-}
-
-/* 英文、代码、年份数字可以用系统等宽字体 */
-.award-year,
-.project-meta,
-code,
-pre {
-    font-family: var(--font-mono);
-}
-
-/* 手机端字体优化 */
-@media (max-width: 768px) {
-    body {
-        font-size: 15px;
-        line-height: 1.75;
-    }
-
-    h1,
-    .hero-title {
-        letter-spacing: -0.06em;
-        line-height: 0.98;
-    }
-
-    h2 {
-        letter-spacing: -0.045em;
-        line-height: 1.08;
-    }
-
-    h3 {
-        letter-spacing: -0.02em;
-    }
-
-    p,
-    li {
-        line-height: 1.75;
-        color: rgba(23, 23, 23, 0.74);
-    }
-
-    .hero-desc,
-    .hero-description,
-    .section-side-note {
-        line-height: 1.8;
-    }
-
-    .section-label,
-    .project-tags span,
-    .tags span,
-    .award-topline span {
-        font-size: 11px;
-        letter-spacing: 0.02em;
-    }
-
-    .nav a,
-    .site-nav a {
-        font-size: 13px;
     }
 }
