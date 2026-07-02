@@ -4,77 +4,73 @@ const contacts = [
     label: "Email",
     value: "huahang3202456@gmail.com",
     href: "mailto:huahang3202456@gmail.com",
-    note: "主要联系邮箱",
-    active: true,
+    note: "发送邮件",
+    external: false,
   },
   {
     label: "Phone",
     value: "135****8649",
     href: "tel:13528938649",
-    note: "公开页面做了隐藏处理",
-    active: true,
+    note: "拨打电话",
+    external: false,
   },
   {
     label: "GitHub",
     value: "H3202456",
     href: "https://github.com/H3202456",
-    note: "代码仓库与作品集托管",
-    active: true,
+    note: "查看代码与项目",
+    external: true,
   },
   {
     label: "小红书",
     value: "HH3202456",
-    href: "",
-    note: "AI Demo 复盘与项目记录",
-    active: false,
+    href: "https://www.xiaohongshu.com/user/profile/5ff493e7000000000101f9c2",
+    note: "小红书账号",
+    external: false,
+    disabled: true,
   },
   {
     label: "抖音",
     value: "HH3202456",
-    href: "",
-    note: "AI Demo 图文与短内容记录",
-    active: false,
+    href: "https://www.douyin.com/user/MS4wLjABAAAAedS1MbPcxAXP1a_aJjf06dVRdVZF9r7DoWkUKhecpF38rNAQA_fY5vIIo4HXgS2n",
+    note: "抖音账号",
+    external: false,
+    disabled: true,
   },
 ];
 ---
 
-<section id="contact" class="section contact" data-animate>
-  <div class="section-label">06 / Contact</div>
-
-  <div class="section-grid">
-    <div>
-      <h2>联系我</h2>
-      <p class="section-side-note">
-        如果你想了解我的项目、AI Demo、作品集，或者有真实需求想一起验证，可以通过下面这些方式找到我。
-      </p>
-    </div>
-
-    <div class="contact-box" data-animate>
-      <p>
-        我目前正在持续做 AI Demo、个人作品集和内容记录。比起空谈方向，我更关注能不能把一个想法做出来、讲清楚、验证掉。
-      </p>
-
-      <div class="contact-card-list">
-        {contacts.map((item) =>
-          item.active ? (
-            <a class="contact-card" href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noreferrer" : undefined}>
-              <span class="contact-label">{item.label}</span>
-              <strong>{item.value}</strong>
-              <small>{item.note}</small>
-            </a>
-          ) : (
-            <div class="contact-card contact-card--disabled">
-              <span class="contact-label">{item.label}</span>
-              <strong>{item.value}</strong>
-              <small>{item.note}</small>
-            </div>
-          )
-        )}
-      </div>
-
-      <p class="small-note">
-        小红书和抖音目前先展示账号 ID。等拿到准确主页链接后，再改成可点击入口。
-      </p>
-    </div>
+<section class="section contact-section" id="contact" data-animate>
+  <div class="section-head">
+    <p class="section-label">Contact</p>
+    <h2>联系我</h2>
+    <p>
+      如果你想了解我的项目、作品集、AI Demo 记录，或者有合适的合作 / 实习 / 项目机会，可以通过下面方式联系我。
+    </p>
   </div>
+
+  <div class="contact-grid">
+    {contacts.map((item) =>
+      item.disabled ? (
+        <div class="contact-card contact-card--disabled" aria-disabled="true">
+          <span>{item.label}</span>
+          <strong>{item.value}</strong>
+          <small>{item.note}</small>
+        </div>
+      ) : (
+        <a
+          class="contact-card contact-card--link"
+          href={item.href}
+          target={item.external ? "_blank" : undefined}
+          rel={item.external ? "noopener noreferrer" : undefined}
+          aria-label={`${item.label}: ${item.value}`}
+        >
+          <span>{item.label}</span>
+          <strong>{item.value}</strong>
+          <small>{item.note}</small>
+        </a>
+      )
+    )}
+  </div>
+
 </section>

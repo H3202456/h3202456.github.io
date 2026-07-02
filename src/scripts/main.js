@@ -3,15 +3,15 @@ import Lenis from "lenis";
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const isMobile = window.matchMedia("(max-width: 860px)").matches;
+const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
 function initSmoothScroll() {
-    if (reduceMotion) return;
+    if (reduceMotion || isMobile) return;
 
     const lenis = new Lenis({
-        duration: 1.15,
+        duration: 1.08,
         smoothWheel: true,
-        wheelMultiplier: 0.9,
-        touchMultiplier: 1.4,
+        wheelMultiplier: 0.88,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     });
 
@@ -25,7 +25,6 @@ function initSmoothScroll() {
 
 function initScrollReveal() {
     const items = gsap.utils.toArray("[data-animate]");
-
     if (!items.length) return;
 
     if (reduceMotion) {
@@ -35,7 +34,7 @@ function initScrollReveal() {
 
     gsap.set(items, {
         opacity: 0,
-        y: 36,
+        y: 32,
         filter: "blur(8px)",
     });
 
@@ -48,7 +47,7 @@ function initScrollReveal() {
                     opacity: 1,
                     y: 0,
                     filter: "blur(0px)",
-                    duration: 0.9,
+                    duration: 0.85,
                     ease: "power3.out",
                 });
 
@@ -56,8 +55,8 @@ function initScrollReveal() {
             });
         },
         {
-            threshold: 0.14,
-            rootMargin: "0px 0px -8% 0px",
+            threshold: 0.12,
+            rootMargin: "0px 0px -10% 0px",
         }
     );
 
@@ -81,8 +80,8 @@ function initHeroIntro() {
     if (eyebrow) {
         tl.from(eyebrow, {
             opacity: 0,
-            y: 16,
-            duration: 0.7,
+            y: 14,
+            duration: 0.65,
         });
     }
 
@@ -91,12 +90,12 @@ function initHeroIntro() {
             titleSpans,
             {
                 opacity: 0,
-                yPercent: 110,
-                rotate: 2,
-                duration: 1,
-                stagger: 0.12,
+                yPercent: 105,
+                rotate: 1.5,
+                duration: 0.95,
+                stagger: 0.1,
             },
-            "-=0.35"
+            "-=0.32"
         );
     }
 
@@ -105,10 +104,10 @@ function initHeroIntro() {
             desc,
             {
                 opacity: 0,
-                y: 22,
-                duration: 0.8,
+                y: 20,
+                duration: 0.75,
             },
-            "-=0.55"
+            "-=0.52"
         );
     }
 
@@ -117,11 +116,11 @@ function initHeroIntro() {
             actions.children,
             {
                 opacity: 0,
-                y: 16,
-                duration: 0.65,
-                stagger: 0.08,
+                y: 14,
+                duration: 0.6,
+                stagger: 0.07,
             },
-            "-=0.45"
+            "-=0.4"
         );
     }
 }
@@ -129,32 +128,36 @@ function initHeroIntro() {
 function initAmbientCodeLayer() {
     if (reduceMotion || isMobile) return;
 
+    const existingLayer = document.querySelector(".ambient-code");
+    if (existingLayer) existingLayer.remove();
+
     const layer = document.createElement("div");
     layer.className = "ambient-code";
     layer.setAttribute("aria-hidden", "true");
 
-    const rows = 12;
+    const rows = 10;
     const chars = ["0", "1"];
 
     for (let i = 0; i < rows; i += 1) {
         const line = document.createElement("div");
         line.className = "ambient-code__line";
 
-        const text = Array.from({ length: 90 }, () => chars[Math.floor(Math.random() * chars.length)]).join(" ");
+        line.textContent = Array.from({ length: 76 }, () => {
+            return chars[Math.floor(Math.random() * chars.length)];
+        }).join(" ");
 
-        line.textContent = text;
-        line.style.top = `${8 + i * 8}%`;
-        line.style.left = `${i % 2 === 0 ? "-8%" : "-22%"}`;
+        line.style.top = `${10 + i * 8}%`;
+        line.style.left = `${i % 2 === 0 ? "-12%" : "-24%"}`;
 
         layer.appendChild(line);
 
         gsap.to(line, {
-            x: i % 2 === 0 ? 90 : 130,
-            duration: 18 + i * 1.8,
+            x: i % 2 === 0 ? 70 : 110,
+            duration: 22 + i * 1.6,
             repeat: -1,
             yoyo: true,
             ease: "sine.inOut",
-            delay: i * 0.2,
+            delay: i * 0.16,
         });
     }
 
@@ -162,7 +165,7 @@ function initAmbientCodeLayer() {
 }
 
 function initMagneticHover() {
-    if (reduceMotion || isMobile) return;
+    if (reduceMotion || !canHover || isMobile) return;
 
     const targets = gsap.utils.toArray(
         ".project-card, .skill-card, .belief-card, .contact-card, .button"
@@ -174,14 +177,17 @@ function initMagneticHover() {
             const relX = event.clientX - rect.left;
             const relY = event.clientY - rect.top;
 
-            const x = (relX / rect.width - 0.5) * 14;
-            const y = (relY / rect.height - 0.5) * 14;
+            const x = (relX / rect.width - 0.5) * 10;
+            const y = (relY / rect.height - 0.5) * 10;
+
+            target.style.setProperty("--mx", `${relX}px`);
+            target.style.setProperty("--my", `${relY}px`);
 
             gsap.to(target, {
                 x,
                 y,
-                rotateX: -y * 0.35,
-                rotateY: x * 0.35,
+                rotateX: -y * 0.22,
+                rotateY: x * 0.22,
                 duration: 0.45,
                 ease: "power3.out",
             });
@@ -201,33 +207,43 @@ function initMagneticHover() {
 }
 
 function initCursorGlow() {
-    if (reduceMotion || isMobile) return;
+    if (reduceMotion || !canHover || isMobile) return;
+
+    const existingGlow = document.querySelector(".cursor-glow");
+    if (existingGlow) existingGlow.remove();
 
     const glow = document.createElement("div");
     glow.className = "cursor-glow";
+    glow.setAttribute("aria-hidden", "true");
     document.body.appendChild(glow);
 
-    window.addEventListener("pointermove", (event) => {
-        gsap.to(glow, {
-            x: event.clientX,
-            y: event.clientY,
-            duration: 0.35,
-            ease: "power3.out",
-        });
-    });
+    window.addEventListener(
+        "pointermove",
+        (event) => {
+            gsap.to(glow, {
+                x: event.clientX,
+                y: event.clientY,
+                duration: 0.35,
+                ease: "power3.out",
+            });
+        },
+        { passive: true }
+    );
 }
 
 function scrambleText(element) {
     if (reduceMotion) return;
+    if (element.dataset.scrambling === "true") return;
 
     const original = element.dataset.originalText || element.textContent;
     element.dataset.originalText = original;
+    element.dataset.scrambling = "true";
 
     const chars = "01AI_DEMO";
     let frame = 0;
     const totalFrames = 18;
 
-    const timer = setInterval(() => {
+    const timer = window.setInterval(() => {
         element.textContent = original
             .split("")
             .map((char, index) => {
@@ -240,13 +256,16 @@ function scrambleText(element) {
         frame += 1;
 
         if (frame >= totalFrames) {
-            clearInterval(timer);
+            window.clearInterval(timer);
             element.textContent = original;
+            element.dataset.scrambling = "false";
         }
     }, 28);
 }
 
 function initScrambleLabels() {
+    if (!canHover || isMobile) return;
+
     const labels = document.querySelectorAll(".brand, .section-label");
 
     labels.forEach((label) => {
@@ -284,9 +303,13 @@ function initDetailsAnimation() {
 }
 
 function initScrollProgress() {
-    const progress = document.createElement("div");
-    progress.className = "scroll-progress";
-    document.body.appendChild(progress);
+    let progress = document.querySelector(".scroll-progress");
+
+    if (!progress) {
+        progress = document.createElement("div");
+        progress.className = "scroll-progress";
+        document.body.appendChild(progress);
+    }
 
     const updateProgress = () => {
         const scrollTop = window.scrollY;
@@ -297,7 +320,33 @@ function initScrollProgress() {
     };
 
     updateProgress();
-    window.addEventListener("scroll", updateProgress, { passive: true });
+
+    window.addEventListener("scroll", updateProgress, {
+        passive: true,
+    });
+}
+
+function initCardLight() {
+    if (reduceMotion || !canHover || isMobile) return;
+
+    const cards = document.querySelectorAll(
+        ".project-card, .skill-card, .belief-card, .contact-card"
+    );
+
+    cards.forEach((card) => {
+        card.addEventListener(
+            "pointermove",
+            (event) => {
+                const rect = card.getBoundingClientRect();
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
+
+                card.style.setProperty("--mx", `${x}px`);
+                card.style.setProperty("--my", `${y}px`);
+            },
+            { passive: true }
+        );
+    });
 }
 
 function init() {
@@ -310,6 +359,7 @@ function init() {
     initHeroIntro();
     initScrollReveal();
     initMagneticHover();
+    initCardLight();
     initScrambleLabels();
     initDetailsAnimation();
 }
