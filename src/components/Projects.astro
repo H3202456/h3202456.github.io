@@ -1,0 +1,59 @@
+---
+const projects = [
+  {
+    title: "《别想了》AI 决策工具",
+    desc: "一个帮助用户减少纠结的小工具。用户输入“要不要做某件事”，系统会给出直接建议、理由和下一步行动。这个项目经历了从想法、后端接口、AI 调用、微信小程序连接，到真实设备测试和体验版发布。",
+    tags: ["微信小程序", "Flask", "Gemini API", "产品验证"],
+  },
+  {
+    title: "AI 日报 / 周报分析助手",
+    desc: "用户上传 Excel 后，系统自动生成日报、周报、风险提示和优先级建议。我对这个项目的理解是：老板真正想知道的不是“今天做了什么”，而是“哪里可能快出问题了”。",
+    tags: ["Streamlit", "Excel 分析", "AI 总结", "风险识别"],
+  },
+  {
+    title: "AI 小红书笔记体检器",
+    desc: "输入标题、封面、正文和数据，分析一篇笔记可能存在的问题。这个项目让我意识到：AI 输出看起来专业，不代表它一定判断正确。",
+    tags: ["内容分析", "AI 诊断", "小红书", "复盘工具"],
+  },
+  {
+    title: "AI 生活管理助手",
+    desc: "记录一天的学习、运动、拖延、睡眠和情绪状态，再由 AI 生成当天复盘。重点不是“记录生活”，而是帮助自己从日常数据里看见风险和趋势。",
+    tags: ["个人管理", "日复盘", "AI 总结", "Streamlit"],
+  },
+  {
+    title: "养老机构管理系统",
+    desc: "Java 课程项目，面向养老机构信息管理，包含老人信息、健康记录、护理记录和风险判断模块。使用面向对象思想，通过实体类、服务层和菜单视图进行分层。",
+    tags: ["Java", "面向对象", "文件存储", "管理系统"],
+  },
+];
+---
+
+<section id="projects" class="section projects" data-animate>
+  <div class="section-label">02 / Projects</div>
+
+  <div class="section-heading">
+    <h2>做过的项目</h2>
+    <p>
+      项目不是摆设，也不是“作品集坟场”。每个 Demo 都对应一次需求理解、一次实现训练、一次复盘。
+    </p>
+  </div>
+
+  <div class="project-list">
+    {projects.map((project, index) => (
+      <article class="project-item" data-animate>
+        <div class="project-index">{String(index + 1).padStart(2, "0")}</div>
+
+        <div class="project-main">
+          <h3>{project.title}</h3>
+          <p>{project.desc}</p>
+
+          <div class="tag-list">
+            {project.tags.map((tag) => (
+              <span>{tag}</span>
+            ))}
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>

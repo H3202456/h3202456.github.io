@@ -1,0 +1,34 @@
+---
+const skills = [
+  {
+    title: "AI Demo 开发",
+    desc: "能用 AI 辅助完成产品原型、页面、接口、数据处理和基础部署，把想法快速变成可以测试的 Demo。",
+  },
+  {
+    title: "产品问题拆解",
+    desc: "关注真实需求，而不是只追求功能堆叠。能尝试把模糊问题拆成用户场景、核心功能和验证方式。",
+  },
+  {
+    title: "内容表达与复盘",
+    desc: "会把项目过程整理成小红书、抖音图文和项目复盘，用内容记录自己的思考、踩坑和迭代过程。",
+  },
+];
+---
+
+<section id="skills" class="section skills" data-animate>
+  <div class="section-label">04 / Skills</div>
+
+  <div class="section-heading">
+    <h2>能力方向</h2>
+    <p>我现在真正想积累的不是某个单点技能，而是一套从问题到产品雏形的完整能力链。</p>
+  </div>
+
+  <div class="skill-grid">
+    {skills.map((skill) => (
+      <article class="skill-card" data-animate>
+        <h3>{skill.title}</h3>
+        <p>{skill.desc}</p>
+      </article>
+    ))}
+  </div>
+</section>

@@ -1,0 +1,13 @@
+[data-animate],
+[data-hero-line] {
+    will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    [data-animate],
+    [data-hero-line] {
+        transform: none !important;
+        opacity: 1 !important;
+    }
+}
